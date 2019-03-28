@@ -11,4 +11,4 @@ package-lock.json
 .idea/
 webpack.config.js
 build.js
-src
+src/
