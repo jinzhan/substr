@@ -49,10 +49,10 @@ export const toArray = (val, option = {hasEmoji: false, emojiMaxLenth: 8, emojiD
     const rsEmoji = (option => {
         return option.emojiData && option.emojiData.length ? option.emojiData
             .map(item => item.replace('[', '\\[').replace(']', '\\]'))
-            .join('|') : '\\[.{1,' + (option.emojiMaxLenth - 2 ) + '}\\]';
+            .join('|') : '\\[.{1,' + (option.emojiMaxLenth - 2 ) + '}?\\]';
     })(option);
 
-    const reUbb = hasUnicode(val) ? new RegExp(rsEmoji + '|' + rsUnicode, 'g') : new RegExp(rsEmoji, 'g');
+    const reUbb = new RegExp(rsEmoji + '|' + rsUnicode, 'g');
     return val.match(reUbb) || [];
 };
 

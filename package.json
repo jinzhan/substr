@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/substr.min.js",
   "scripts": {
-    "build": "BABEL_ENV=NODE babel-node ./build.js"
+    "build": "BABEL_ENV=NODE babel-node ./build.js",
+    "test": "BABEL_ENV=NODE babel-node ./node_modules/mocha/bin/mocha --require ./node_modules/@babel/register"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,10 @@
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-transform-new-target": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
     "babel-loader": "^8.0.5",
     "chalk": "^2.4.2",
+    "mocha": "^6.0.2",
     "ora": "^3.2.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.29.6"
