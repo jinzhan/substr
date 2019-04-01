@@ -1,6 +1,8 @@
 /**
- * 截取指定长度的字符串
- *  refer: https://github.com/qlover/loadsh/blob/39a75c454047c51c328e608756d535791e6cdd88/loadsh-4.17.5/loadsh-4.17.5.js
+ * @file 截取指定长度的字符串，将emoji和自定义的ubb表情识别为1个字符
+ * @author jinzhan <jinzhan@baidu.com>
+ *
+ * 字符串编码相关正则表达式：refer: https://github.com/qlover/loadsh/blob/39a75c454047c51c328e608756d535791e6cdd88/loadsh-4.17.5/loadsh-4.17.5.js
  * **/
 
 const rsAstralRange = '\\ud800-\\udfff';
@@ -41,7 +43,7 @@ const asciiToArray = val => val.split('');
 * @param {number}   option.emojiMaxLenth 单个emoji文本的最大长度，默认：8
 * @param {Array}    option.emojiData emoji的详细信息，如果存在，则忽略emojiMaxLenth
 * */
-export const toArray = (val, option = {hasEmoji: false, emojiMaxLenth: 8, emojiData: []}) => {
+export const str2Array = (val, option = {hasEmoji: false, emojiMaxLenth: 8, emojiData: []}) => {
     if (!option.hasEmoji) {
         return hasUnicode(val) ? unicodeToArray(val) : asciiToArray(val);
     }
@@ -67,7 +69,7 @@ export const toArray = (val, option = {hasEmoji: false, emojiMaxLenth: 8, emojiD
  * */
 const substr = (str, start, ...option) => {
     const hasLength = typeof option[0] === 'number';
-    const data = hasLength ? toArray(str, option[1]) : toArray(str, option[0]);
+    const data = hasLength ? str2Array(str, option[1]) : str2Array(str, option[0]);
     const ret = hasLength ? data.splice(start, option[0]) : data.splice(start);
     return ret.join('');
 };

@@ -1,5 +1,10 @@
+/**
+ * @file 截取指定长度的字符串，将emoji和自定义的ubb表情识别为1个字符
+ * @author jinzhan <jinzhan@baidu.com>
+ */
+
 import assert from 'assert';
-import substr, {toArray} from '../src/index';
+import substr, {str2Array} from '../src/index.js';
 
 describe('substr', function() {
     describe('#substr()', function() {
@@ -32,21 +37,21 @@ describe('substr', function() {
         });
     });
 
-    describe('#toArray()', function() {
+    describe('#str2Array()', function() {
 
         it('默认忽略emoji', function() {
-            assert.equal(toArray('👩‍👩‍👦[百度][微笑]a').length, 10);
+            assert.equal(str2Array('👩‍👩‍👦[百度][微笑]a').length, 10);
         });
 
         it('支持识别emoji', function() {
-            assert.equal(toArray('👩‍👩‍👦[百度][微笑]a', {
+            assert.equal(str2Array('👩‍👩‍👦[百度][微笑]a', {
                 hasEmoji: true,
                 emojiMaxLenth: 8,
             }).length, 4);
         });
 
         it('支持自定义emoji', function() {
-            assert.equal(toArray('👩‍👩‍👦[百度][微笑]a', {
+            assert.equal(str2Array('👩‍👩‍👦[百度][微笑]a', {
                 hasEmoji: true,
                 emojiData: [
                     '[百度]'
@@ -55,7 +60,7 @@ describe('substr', function() {
         });
 
         it('支持纯emoji', function() {
-            assert.equal(toArray('[百度][微笑]a', {
+            assert.equal(str2Array('[百度][微笑]a', {
                 hasEmoji: true,
                 emojiData: [
                     '[百度]'
